@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   # end
   namespace :api do
     get "/actors" => "actors#actors_action"
+    get "/movies_all" => "movies#movies_all"
+    get "movies_individual" => "movies#movies_individual"
   end
 end
+
+# HTTP Gem located under movie_app/movie_http_gem.rb

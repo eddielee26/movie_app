@@ -1,14 +1,39 @@
 class Api::MoviesController < ApplicationController
 
-  def movies_all
+  def movie_index
     @movies = Movie.all
-    render 'movies_all.json.jb'
+    render 'movie_index.json.jb'
   end
 
-  def movies_individual
-    @movie = Movie.first
-    render 'movies_individual.json.jb'
+  def movie_show
+    @movie = Movie.find_by(id: params[:id])
+    render 'movie_show.json.jb'
+  end
+
+  def movie_create
+    @movie = Movie.create(
+      id: params[:id],
+      title: params[:title],
+      year: params[:year],
+      plot: params[:plot]
+    )
+    @movie.save
+    render 'movie_show.json.jb'
+  end
+
+  def movie_update
+    @movie = Movie.find_by(id: params[:id])
+    @movie.id = params[:id] || @movie.id
+    @movie.title = params[:title] || @movie.title
+    @movie.year = params[:year] || @movie.year
+    @movie.plot = params[:plot] || @movie.plot
+    @movie.save
+    render 'movie_show.json.jb'
+  end
+
+  def movie_destroy
+    movie = Movie.find_by(id: params[:id])
+    movie.destroy
+    render json: {message: "Movie destroyed"}
   end
 end
-
-# HTTP Gem located under movie_app/movie_http_gem.rb

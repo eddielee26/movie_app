@@ -1,7 +1,7 @@
 {
+  id: @movie.id,
   title: @movie.title,
   year: @movie.year,
   plot: @movie.plot
 }
 
-# HTTP Gem located under movie_app/movie_http_gem.rb

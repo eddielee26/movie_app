@@ -17,8 +17,11 @@ class Api::MoviesController < ApplicationController
       year: params[:year],
       plot: params[:plot]
     )
-    @movie.save
-    render 'movie_show.json.jb'
+    if @movie.save
+      render 'movie_show.json.jb'
+    else
+      render json: {errors: @movie.errors.full_messages}, status: 422
+    end
   end
 
   def movie_update
@@ -27,8 +30,11 @@ class Api::MoviesController < ApplicationController
     @movie.title = params[:title] || @movie.title
     @movie.year = params[:year] || @movie.year
     @movie.plot = params[:plot] || @movie.plot
-    @movie.save
-    render 'movie_show.json.jb'
+    if @movie.save
+      render 'movie_show.json.jb'
+    else
+      render json: {errors: @movie.errors.full_messages}, status: 422
+    end
   end
 
   def movie_destroy

@@ -1,3 +1,3 @@
 class Movie < ApplicationRecord
-  validates_format_of :title, with: /[a-zA-Z0-9]/
+  # validates_format_of :title, with: /[a-zA-Z0-9]/ # validation for english only
 end

@@ -15,10 +15,15 @@ class Api::ActorsController < ApplicationController
       id: params[:id],
       first_name: params[:first_name],
       last_name: params[:last_name],
-      known_for: params[:known_for]
+      known_for: params[:known_for],
+      gender: params[:gender],
+      age: params[:age]
     )
-    @actor.save
-    render 'actor_show.json.jb'
+    if @actor.save
+      render 'actor_show.json.jb'
+    else
+      render json: {errors: @movie.errors.full_messages}, status: 422
+    end
   end
 
   def actor_update
@@ -27,8 +32,13 @@ class Api::ActorsController < ApplicationController
     @actor.first_name = params[:first_name] || @actor.first_name
     @actor.last_name = params[:last_name] || @actor.last_name
     @actor.known_for = params[:known_for] || @actor.known_for
-    @actor.save
-    render 'actor_show.json.jb'
+    @actor.gender = params[:gender] || @actor.gender
+    @actor.age = params[:age] || @actor.age
+    if @actor.save
+      render 'actor_show.json.jb'
+    else
+      render json: {errors: @movie.errors.full_messages}, status: 422
+    end
   end
 
   def actor_destroy

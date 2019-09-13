@@ -6,5 +6,6 @@
   gender: actor.gender,
   age: actor.age,
   movie_plot: actor.movie.plot,
-  movie_id: actor.movie
+  movie_id: actor.movie,
+  logged_in_user: current_user
 }
